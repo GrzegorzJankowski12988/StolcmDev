@@ -19,42 +19,45 @@
       overflow-x: hidden;
     }
 
-    header {
-      background: #0a0a0a;
-      padding: 2rem;
-      text-align: center;
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: #e0e0e0;
-      border-bottom: 1px solid #2a2a2a;
+    .site-header {
+      background: #0f0f0f;
+      padding: 1.5rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .site-header img {
+      height: 48px;
+      width: 48px;
+      object-fit: contain;
+    }
+
+    .site-header h1 {
+      color: #f5f5f5;
+      font-size: 2rem;
+      font-weight: 600;
       letter-spacing: 1px;
-      z-index: 2;
-      position: relative;
     }
 
     .navbar {
       background: #0a0a0a;
-      border-bottom: 2px solid #ff2c2c;
       position: sticky;
       top: 0;
       z-index: 10;
+      border-bottom: 2px solid #1f1f1f;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
     }
 
     .navbar-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0.8rem 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-
-    .navbar-logo {
-      color: #e0e0e0;
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: 1px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.8rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .navbar-menu {
@@ -63,9 +66,19 @@
       gap: 1.5rem;
     }
 
+    .navbar-menu.left {
+      flex: 1;
+      justify-content: flex-start;
+    }
+
+    .navbar-menu.right {
+      flex: 1;
+      justify-content: flex-end;
+    }
+
     .navbar-menu li a {
       position: relative;
-      color: #ccc;
+      color: #e0e0e0;
       text-decoration: none;
       font-weight: 500;
       font-size: 0.95rem;
@@ -113,7 +126,8 @@
         display: flex;
       }
 
-      .navbar-menu {
+      .navbar-menu.left,
+      .navbar-menu.right {
         position: absolute;
         top: 100%;
         right: 0;
@@ -156,12 +170,8 @@
     }
 
     @keyframes zoomEffect {
-      0% {
-        transform: scale(1);
-      }
-      100% {
-        transform: scale(1.1);
-      }
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
     }
 
     .overlay {
@@ -206,29 +216,28 @@
   </style>
 </head>
 <body>
-  <header>
-    StolcmDev Studio
+  <header class="site-header">
+    <img src="logo.png" alt="Logo">
+    <h1>StolcmDev Studio</h1>
   </header>
 
-<nav class="navbar">
-  <div class="navbar-container">
-    <ul class="navbar-menu" style="gap: 1.5rem;">
-      <li><a href="#">DOWNLOAD</a></li>
-    </ul>
-    <div class="navbar-toggle" id="mobile-menu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <ul class="navbar-menu left">
+        <li><a href="#">DOWNLOAD</a></li>
+      </ul>
+      <div class="navbar-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+      <ul class="navbar-menu right">
+        <li><a href="#">O NAS</a></li>
+        <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw9WgXcQ&start_radio=1">GRY</a></li>
+        <li><a href="https://drive.google.com/drive/folders/1D-Kyg3eHtf7r7XJFNlRIhXTh60sLH-oO?hl=PL">MATERIAŁY</a></li>
+      </ul>
     </div>
-    <ul class="navbar-menu">
-      <li><a href="#">O NAS</a></li>
-      <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw9WgXcQ&start_radio=1">GRY</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1D-Kyg3eHtf7r7XJFNlRIhXTh60sLH-oO?hl=PL">MATERIAŁY</a></li>
-    </ul>
-  </div>
-</nav>
-
-
+  </nav>
 
   <div class="main-content">
     <video id="hero-video" src="Video.mp4" autoplay loop muted></video>
@@ -242,10 +251,12 @@
 
   <script>
     const mobileMenu = document.getElementById('mobile-menu');
-    const navbarMenu = document.querySelector('.navbar-menu');
+    const leftMenu = document.querySelector('.navbar-menu.left');
+    const rightMenu = document.querySelector('.navbar-menu.right');
 
     mobileMenu.addEventListener('click', () => {
-      navbarMenu.classList.toggle('active');
+      leftMenu.classList.toggle('active');
+      rightMenu.classList.toggle('active');
       mobileMenu.classList.toggle('active');
     });
 
