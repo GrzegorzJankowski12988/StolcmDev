@@ -19,58 +19,71 @@
       overflow-x: hidden;
     }
 
-    /* ULEPSZONY HEADER */
     .site-header {
-      background: rgba(10, 10, 10, 0.6);
-      backdrop-filter: blur(10px);
-      border-bottom: 2px solid #ff2c2c;
-      padding: 1.5rem 2rem;
-      text-align: center;
-      position: relative;
-      z-index: 5;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-    }
-
-    .header-content {
+      background: #0f0f0f;
+      padding: 1.5rem 1rem;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: space-between;
       gap: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
       flex-wrap: wrap;
     }
 
-    .logo {
-      width: 50px;
-      height: 50px;
+    .site-header img {
+      height: 48px;
+      width: 48px;
       object-fit: contain;
-      filter: drop-shadow(0 0 4px #ff2c2c);
     }
 
-    .studio-name {
+    .site-header h1 {
+      color: #f5f5f5;
       font-size: 2rem;
-      color: #e0e0e0;
-      letter-spacing: 1.2px;
-      font-weight: 700;
-      text-shadow: 0 0 5px rgba(255, 44, 44, 0.6);
+      font-weight: 600;
+      letter-spacing: 1px;
     }
 
-    @media (max-width: 600px) {
-      .studio-name {
-        font-size: 1.5rem;
-      }
+    .header-buttons {
+      display: flex;
+      gap: 0.75rem;
+      margin-left: auto;
+    }
 
-      .logo {
-        width: 40px;
-        height: 40px;
-      }
+    .header-buttons .btn {
+      padding: 0.5rem 1.2rem;
+      border: none;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      color: white;
+      transition: background 0.3s ease;
+    }
+
+    .header-buttons .login-btn {
+      background-color: #d62828;
+    }
+
+    .header-buttons .login-btn:hover {
+      background-color: #a61b1b;
+    }
+
+    .header-buttons .register-btn {
+      background-color: #f77f00;
+    }
+
+    .header-buttons .register-btn:hover {
+      background-color: #c56600;
     }
 
     .navbar {
       background: #0a0a0a;
-      border-bottom: 2px solid #ff2c2c;
       position: sticky;
       top: 0;
       z-index: 10;
+      border-bottom: 2px solid #1f1f1f;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
     }
 
     .navbar-container {
@@ -82,22 +95,25 @@
       align-items: center;
     }
 
-    .navbar-logo {
-      color: #e0e0e0;
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
     .navbar-menu {
       list-style: none;
       display: flex;
       gap: 1.5rem;
     }
 
+    .navbar-menu.left {
+      flex: 1;
+      justify-content: flex-start;
+    }
+
+    .navbar-menu.right {
+      flex: 1;
+      justify-content: flex-end;
+    }
+
     .navbar-menu li a {
       position: relative;
-      color: #ccc;
+      color: #e0e0e0;
       text-decoration: none;
       font-weight: 500;
       font-size: 0.95rem;
@@ -145,7 +161,8 @@
         display: flex;
       }
 
-      .navbar-menu {
+      .navbar-menu.left,
+      .navbar-menu.right {
         position: absolute;
         top: 100%;
         right: 0;
@@ -170,6 +187,15 @@
         padding: 1rem;
         font-size: 1rem;
       }
+
+      .header-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .site-header {
+        justify-content: space-between;
+      }
     }
 
     .main-content {
@@ -188,12 +214,8 @@
     }
 
     @keyframes zoomEffect {
-      0% {
-        transform: scale(1);
-      }
-      100% {
-        transform: scale(1.1);
-      }
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
     }
 
     .overlay {
@@ -238,18 +260,20 @@
   </style>
 </head>
 <body>
-
-  <!-- NOWY HEADER -->
   <header class="site-header">
-    <div class="header-content">
-      <img src="logo.png" alt="StolcmDev Logo" class="logo" />
-      <h1 class="studio-name">StolcmDev Studio</h1>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <img src="logo.png" alt="Logo">
+      <h1>StolcmDev Studio</h1>
+    </div>
+    <div class="header-buttons">
+      <a href="/login" class="btn login-btn">Zaloguj</a>
+      <a href="/register" class="btn register-btn">Zarejestruj</a>
     </div>
   </header>
 
   <nav class="navbar">
     <div class="navbar-container">
-      <ul class="navbar-menu" style="gap: 1.5rem;">
+      <ul class="navbar-menu left">
         <li><a href="https://drive.google.com/drive/folders/1D-Kyg3eHtf7r7XJFNlRIhXTh60sLH-oO?hl=PL">DOWNLOAD</a></li>
       </ul>
       <div class="navbar-toggle" id="mobile-menu">
@@ -257,9 +281,9 @@
         <span class="bar"></span>
         <span class="bar"></span>
       </div>
-      <ul class="navbar-menu">
-        <li><a href="#">O NAS</a></li>
-        <li><a href="#">GRY</a></li>
+      <ul class="navbar-menu right">
+        <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw9WgXcQ&start_radio=1">O NAS</a></li>
+        <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw9WgXcQ&start_radio=1">GRY</a></li>
         <li><a href="https://www.youtube.com/@LevviC137/videos">MATERIAŁY</a></li>
       </ul>
     </div>
@@ -277,10 +301,12 @@
 
   <script>
     const mobileMenu = document.getElementById('mobile-menu');
-    const navbarMenu = document.querySelector('.navbar-menu');
+    const leftMenu = document.querySelector('.navbar-menu.left');
+    const rightMenu = document.querySelector('.navbar-menu.right');
 
     mobileMenu.addEventListener('click', () => {
-      navbarMenu.classList.toggle('active');
+      leftMenu.classList.toggle('active');
+      rightMenu.classList.toggle('active');
       mobileMenu.classList.toggle('active');
     });
 
