@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StolcmDev Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body, html {
+      height: 100%;
+      background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
+      overflow-x: hidden;
+    }
+
+    /* ULEPSZONY HEADER */
+    .site-header {
+      background: rgba(10, 10, 10, 0.6);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid #ff2c2c;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 4px #ff2c2c);
+    }
+
+    .studio-name {
+      font-size: 2rem;
+      color: #e0e0e0;
+      letter-spacing: 1.2px;
+      font-weight: 700;
+      text-shadow: 0 0 5px rgba(255, 44, 44, 0.6);
+    }
+
+    @media (max-width: 600px) {
+      .studio-name {
+        font-size: 1.5rem;
+      }
+
+      .logo {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    .navbar {
+      background: #0a0a0a;
+      border-bottom: 2px solid #ff2c2c;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.8rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-logo {
+      color: #e0e0e0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .navbar-menu {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .navbar-menu li a {
+      position: relative;
+      color: #ccc;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.5rem;
+      transition: color 0.3s;
+    }
+
+    .navbar-menu li a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      height: 2px;
+      width: 0%;
+      background: #ff2c2c;
+      transition: width 0.3s, left 0.3s;
+    }
+
+    .navbar-menu li a:hover {
+      color: #ff2c2c;
+    }
+
+    .navbar-menu li a:hover::after {
+      width: 100%;
+      left: 0;
+    }
+
+    .navbar-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .bar {
+      height: 3px;
+      width: 25px;
+      background-color: #ff2c2c;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .navbar-toggle {
+        display: flex;
+      }
+
+      .navbar-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #0a0a0a;
+        flex-direction: column;
+        width: 200px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        border-left: 2px solid #ff2c2c;
+        border-bottom: 2px solid #ff2c2c;
+      }
+
+      .navbar-menu.active {
+        transform: translateX(0);
+      }
+
+      .navbar-menu li {
+        border-bottom: 1px solid #2a2a2a;
+      }
+
+      .navbar-menu li a {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+    }
+
+    .main-content {
+      position: relative;
+      width: 100%;
+      height: 90vh;
+      overflow: hidden;
+    }
+
+    .main-content video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.8) contrast(1.1);
+      animation: zoomEffect 30s ease-in-out infinite alternate;
+    }
+
+    @keyframes zoomEffect {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.1);
+      }
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.65));
+      z-index: 1;
+    }
+
+    .dynamic-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      color: #ffffff;
+      font-size: 3.5rem;
+      font-weight: 700;
+      text-align: center;
+      white-space: nowrap;
+      letter-spacing: 1px;
+      opacity: 0.8;
+    }
+
+    footer {
+      background: #0a0a0a;
+      padding: 1.5rem;
+      text-align: center;
+      color: #ccc;
+      font-size: 0.9rem;
+      border-top: 2px solid #ff2c2c;
+    }
+
+    @media (max-width: 768px) {
+      .dynamic-text {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NOWY HEADER -->
+  <header class="site-header">
+    <div class="header-content">
+      <img src="logo.png" alt="StolcmDev Logo" class="logo" />
+      <h1 class="studio-name">StolcmDev Studio</h1>
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <ul class="navbar-menu" style="gap: 1.5rem;">
+        <li><a href="https://drive.google.com/drive/folders/1D-Kyg3eHtf7r7XJFNlRIhXTh60sLH-oO?hl=PL">DOWNLOAD</a></li>
+      </ul>
+      <div class="navbar-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+      <ul class="navbar-menu">
+        <li><a href="#">O NAS</a></li>
+        <li><a href="#">GRY</a></li>
+        <li><a href="https://www.youtube.com/@LevviC137/videos">MATERIAŁY</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="main-content">
+    <video id="hero-video" src="Video.mp4" autoplay loop muted></video>
+    <div class="overlay"></div>
+    <div class="dynamic-text" id="dynamicText"></div>
+  </div>
+
+  <footer>
+    &copy; 2025 StolcmDev Studio. Wszelkie prawa zastrzeżone.
+  </footer>
+
+  <script>
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navbarMenu = document.querySelector('.navbar-menu');
+
+    mobileMenu.addEventListener('click', () => {
+      navbarMenu.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+    });
+
+    const video = document.getElementById('hero-video');
+    const textEl = document.getElementById('dynamicText');
+
+    const captions = [
+      { start: 0, end: 8.56, text: 'The Hospaki' },
+      { start: 8.56, end: 16.85, text: 'Ice King' },
+      { start: 16.85, end: 23.28, text: 'Gra TszyDe' },
+      { start: 23.28, end: 9999, text: 'Springcock' }
+    ];
+
+    let currentCaption = '';
+
+    function updateText() {
+      const time = video.currentTime;
+      const caption = captions.find(cap => time >= cap.start && time < cap.end);
+      if (caption && caption.text !== currentCaption) {
+        currentCaption = caption.text;
+        textEl.textContent = caption.text;
+      }
+      requestAnimationFrame(updateText);
+    }
+
+    video.addEventListener('play', () => {
+      updateText();
+    });
+  </script>
+</body>
+</html>
